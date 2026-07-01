@@ -1,0 +1,99 @@
+.explore-online {
+  padding: 40px 20px;
+  position: relative;
+  z-index: 2;
+  background-color: $color-white;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  &__title {
+    font-family: $font-accent;
+    font-size: 32px;
+    text-transform: uppercase;
+    margin-top: 5px;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+      padding: 0 10px;
+    }
+  }
+}
+
+.explore-card {
+  display: flex;
+  flex-direction: column; /* КРИТИЧНО: змушує картинку, заголовок і текст іти зверху вниз */
+  align-items: center; /* Центрує всі елементи всередині картки */
+  text-align: center; /* Центрує текст всередині рядків */
+
+  width: 100%; /* Картка адаптується під ширину екрана */
+  max-width: 280px; /* Обмежуємо максимальну ширину картки за Figma */
+  margin: 0 auto 40px; /* Центрує саму картку на екрані та робить відступ знизу */
+
+  /* Переносимо мобільний адаптив сюди, щоб він був нижче за max-width: 280px і міг його перевизначити */
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
+
+  /* ОБГОРТКА ДЛЯ КАРТИНКИ (В HTML це має бути тег <a href="#" class="explore-card__thumb">) */
+  &__thumb {
+    display: block; /* Робимо блочним, щоб посилання адекватно тримало розміри */
+    width: 100%; /* Робимо адаптивною */
+    max-width: 280px; /* Але тримає ліміт з Figma */
+    height: 277px; /* Чітка висота з Figma */
+    margin-bottom: 20px;
+    overflow: hidden; /* Стримує картинку всередині при збільшенні */
+    flex-shrink: 0; /* Забороняє браузеру стискати контейнер картини */
+    cursor: pointer; /* Вказівний палець при наведенні */
+  }
+
+  /* САМА КАРТИНКА */
+  &__img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    transition: $transition-speed-main $transition-ease; /* ДОДАНО: плавна анімація збільшення */
+
+    /* ДОДАНО: ефект збільшення при наведенні мишки */
+    &:hover {
+      transform: scale(1.05); /* Збільшення на 5% */
+    }
+  }
+
+  /* ЗАГОЛОВОК КАРТКИ */
+  &__title {
+    font-family: $font-accent;
+    font-size: 22px;
+    text-transform: uppercase;
+    color: $color-red;
+    margin: 0 0 12px; /* Зануляємо дефолтні марджини браузера, лишаємо тільки знизу */
+    letter-spacing: 1px;
+    width: 100%; /* Займає всю ширину картки */
+  }
+
+  /* ТЕКСТ КАРТКИ */
+  &__text {
+    font-family: $font-main;
+    font-size: 16px;
+    line-height: 1.6;
+    color: $color-main-dark;
+    font-weight: 400;
+    margin: 0; /* Скидаємо дефолтні відступи браузера */
+    max-width: 100%;
+  }
+}

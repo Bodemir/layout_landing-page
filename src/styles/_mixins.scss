@@ -1,0 +1,26 @@
+@use 'variables' as v; // Підключаємо змінні
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin on-tablet {
+  @media screen and (min-width: v.$tablet) {
+    // Беремо значення з variables
+    @content;
+  }
+}
+
+@mixin on-desktop {
+  @media screen and (min-width: v.$desktop) {
+    @content;
+  }
+}
+
+@mixin on-tv {
+  @media screen and (min-width: v.$tv) {
+    @content;
+  }
+}

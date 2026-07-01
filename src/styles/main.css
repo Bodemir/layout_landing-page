@@ -1,0 +1,771 @@
+@charset "UTF-8";
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* Змушує паддінги рахуватися всередину ширини екрана */
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* КРИТИЧНО: обрізає будь-який випадковий правий скролл */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #161616;
+  background-color: #ffffff;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.page:has(.page__menu:target) {
+  overflow: hidden;
+}
+
+.header {
+  box-sizing: border-box;
+  padding: 10px 20px;
+  height: 100vh;
+  background-image: url(../../public/images/header-bg.png);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+@media screen and (min-width: 768px) {
+  .header {
+    background-image: url(../../public/images/header-bg.png);
+  }
+}
+.header__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 5px;
+}
+@media screen and (min-width: 768px) {
+  .header__top {
+    padding: 20px 40px;
+  }
+}
+.header__logo {
+  display: inline-block;
+  z-index: 5;
+  width: 64px;
+  height: 46px;
+  opacity: 1;
+}
+.header__logo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+.header__icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.header__title {
+  position: absolute;
+  top: 35%;
+  color: #ffffff;
+  width: 280px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+@media screen and (min-width: 768px) {
+  .header__title {
+    width: 600px;
+  }
+}
+@media screen and (min-width: 1920px) {
+  .header__title {
+    width: 1000px;
+    top: 30%;
+  }
+}
+.header__title h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 2.5rem;
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Початково меню повністю сховане за правим краєм екрана */
+  width: 100%; /* Займає всю ширину екрана на мобільці */
+  height: 100vh; /* На всю висоту екрана */
+  background-color: #d12d35;
+  z-index: 100; /* Точно вище за твій білий щит секцій контенту (у якого z-index: 2) */
+  overflow-y: auto; /* Вимога №12: скрол, якщо меню вище за екран */
+  transition: right 0.4s ease; /* Плавний виїзд меню */
+}
+.menu:target {
+  right: 0; /* Меню плавно виїжджає на екран */
+}
+.menu__top {
+  position: sticky; /* Вимога №12: хрестик закриття завжди видимий при скролі */
+  top: 0;
+  z-index: 1;
+  background-color: #d12d35; /* Закриває собою контент, що скролиться під ним */
+}
+
+.icon {
+  display: block;
+  height: 24px;
+  width: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.icon--phone {
+  background-image: url('../../public/icons/icon_phone.png');
+}
+.icon--menu {
+  background-image: url('../../public/icons/icon_menu.png');
+}
+.icon--close {
+  background-image: url('../../public/icons/icon_close.png');
+}
+@media screen and (min-width: 1920px) {
+  .icon {
+    height: 48px;
+    width: 48px;
+  }
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  background-color: #d12d35;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  padding: 30px;
+  box-sizing: border-box;
+  transform: translateX(100%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.menu:target {
+  transform: translateX(0);
+}
+.menu__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+  width: 100%;
+}
+.menu .nav {
+  margin-bottom: 30px;
+}
+.menu .nav__list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.menu .nav__link {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.menu__header--bottom {
+  margin-top: auto;
+  width: 100%;
+  margin-left: -10px;
+  margin-bottom: 30px;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  line-height: 27px;
+}
+.menu__met-bottom-title {
+  color: #ffffff;
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.2;
+  font-weight: 700;
+}
+.menu__phone-number {
+  display: block;
+  color: #ffffff;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  margin-top: 10px;
+}
+.menu__phone-number:hover {
+  text-decoration: underline;
+}
+.menu__call-to-order {
+  display: inline-block;
+  width: -moz-fit-content;
+  width: fit-content;
+  color: #ffffff;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 11px;
+  margin-top: 10px;
+  cursor: pointer;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-weight: 700;
+}
+
+.museum-hours {
+  padding: 40px 20px;
+}
+.museum-hours__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.museum-hours__subtitle {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #d12d35;
+  font-weight: bold;
+}
+.museum-hours__title {
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+.museum-hours__content {
+  max-width: 320px;
+  margin: 0 auto;
+  font-family: 'Cinzel', serif;
+}
+
+.museum-location {
+  margin-bottom: 30px;
+}
+.museum-location:last-child {
+  margin-bottom: 0;
+}
+.museum-location__title {
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+.museum-location__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+.museum-location__time,
+.museum-location__status {
+  font-weight: 700;
+  flex-shrink: 0;
+  width: 110px;
+}
+.museum-location__days {
+  text-transform: uppercase;
+  color: #161616;
+  text-align: left;
+  flex-grow: 1;
+}
+.museum-location__holidays {
+  margin-top: 25px;
+}
+.museum-location__holidays h4 {
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+.museum-location__holidays p {
+  font-size: 14px;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: #161616;
+}
+
+.now-on-view {
+  padding: 40px 20px;
+}
+.now-on-view__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.now-on-view__title {
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  text-transform: uppercase;
+  margin-top: 5px;
+  max-width: 100%;
+}
+.now-on-view__exhibitions {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.museum-location__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.exhibition-card {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+.exhibition-card__collage {
+  flex: 0 0 66.666%;
+  aspect-ratio: 2/1;
+  background-image: url('/public/images/exhibition-collage.png');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: 45% center;
+  border-right: 20px solid #ffffff;
+  cursor: pointer;
+  transition: background-size 0.4s ease;
+}
+.exhibition-card__collage:hover {
+  background-size: 105% auto;
+}
+.exhibition-card__portrait {
+  flex: 0 0 33.333%;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+}
+.exhibition-card__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.exhibition-card__img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.exhibition-card__img:hover {
+  transform: scale(1.05);
+}
+.exhibition-card__info {
+  text-transform: uppercase;
+  font-family: 'Cinzel', serif;
+  text-align: left;
+}
+.exhibition-card__title {
+  color: #d12d35;
+  font-weight: 700;
+}
+
+.exhibition-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  max-width: 1020px;
+  margin: 0 auto 40px;
+}
+.exhibition-row .exhibition-thumb {
+  flex: 1;
+  overflow: hidden;
+}
+.exhibition-row .exhibition-thumb__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.exhibition-row .exhibition-thumb__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.exhibition-row .exhibition-thumb__img:hover {
+  transform: scale(1.05);
+}
+
+.exhibition-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.btn-primary {
+  display: inline-block;
+  background-color: #d12d35;
+  color: #ffffff;
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  padding: 15px 30px;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+.btn-primary:hover {
+  background-color: #a82326;
+  cursor: pointer;
+}
+
+.explore-online {
+  padding: 40px 20px;
+  position: relative;
+  z-index: 2;
+  background-color: #ffffff;
+}
+.explore-online__header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.explore-online__title {
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  text-transform: uppercase;
+  margin-top: 5px;
+}
+.explore-online__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+@media (max-width: 768px) {
+  .explore-online__row {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10px;
+  }
+}
+
+.explore-card {
+  display: flex;
+  flex-direction: column; /* КРИТИЧНО: змушує картинку, заголовок і текст іти зверху вниз */
+  align-items: center; /* Центрує всі елементи всередині картки */
+  text-align: center; /* Центрує текст всередині рядків */
+  width: 100%; /* Картка адаптується під ширину екрана */
+  max-width: 280px; /* Обмежуємо максимальну ширину картки за Figma */
+  margin: 0 auto 40px auto; /* Центрує саму картку на екрані та робить відступ знизу */
+  /* Переносимо мобільний адаптив сюди, щоб він був нижче за max-width: 280px і міг його перевизначити */
+}
+@media (max-width: 768px) {
+  .explore-card {
+    max-width: 100%;
+  }
+}
+.explore-card {
+  /* ОБГОРТКА ДЛЯ КАРТИНКИ (В HTML це має бути тег <a href="#" class="explore-card__thumb">) */
+}
+.explore-card__thumb {
+  display: block; /* Робимо блочним, щоб посилання адекватно тримало розміри */
+  width: 100%; /* Робимо адаптивною */
+  max-width: 280px; /* Але тримає ліміт з Figma */
+  height: 277px; /* Чітка висота з Figma */
+  margin-bottom: 20px;
+  overflow: hidden; /* Стримує картинку всередині при збільшенні */
+  flex-shrink: 0; /* Забороняє браузеру стискати контейнер картини */
+  cursor: pointer; /* Вказівний палець при наведенні */
+}
+.explore-card {
+  /* САМА КАРТИНКА */
+}
+.explore-card__img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+  transition: 0.4s ease; /* ДОДАНО: плавна анімація збільшення */
+  /* ДОДАНО: ефект збільшення при наведенні мишки */
+}
+.explore-card__img:hover {
+  transform: scale(1.05); /* Збільшення на 5% */
+}
+.explore-card {
+  /* ЗАГОЛОВОК КАРТКИ */
+}
+.explore-card__title {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  text-transform: uppercase;
+  color: #d12d35;
+  margin: 0 0 12px 0; /* Зануляємо дефолтні марджини браузера, лишаємо тільки знизу */
+  letter-spacing: 1px;
+  width: 100%; /* Займає всю ширину картки */
+}
+.explore-card {
+  /* ТЕКСТ КАРТКИ */
+}
+.explore-card__text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #161616;
+  font-weight: 400;
+  margin: 0; /* Скидаємо дефолтні відступи браузера */
+  max-width: 100%;
+}
+
+.contacts {
+  padding: 60px 20px;
+  background-color: #ffffff;
+}
+.contacts__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+.contacts__title {
+  font-family: 'Cinzel', serif;
+  font-size: 36px;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+.contacts__content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .contacts__content {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+}
+.contacts__address {
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+}
+.contacts__maps-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.contacts__maps-link:hover {
+  color: #d12d35;
+  text-decoration: underline;
+}
+
+.contacts-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 320px;
+}
+.contacts-branch__name {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+.contacts-branch__group {
+  margin-bottom: 20px;
+  width: 100%;
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.contacts-branch__group:last-child {
+  margin-bottom: 0;
+}
+.contacts-branch__label {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: rgb(98.5, 98.5, 98.5);
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+.contacts-branch__address {
+  font-style: normal;
+}
+.contacts-branch__link,
+.contacts-branch__address-link {
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  color: #161616;
+  text-decoration: none;
+  line-height: 1.4;
+  display: inline-block;
+  transition: color 0.2s ease;
+}
+.contacts-branch__link:hover,
+.contacts-branch__address-link:hover {
+  color: #d12d35;
+}
+.contacts-branch__link--phone {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.contacts-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+.contacts-form__group {
+  width: 100%;
+}
+.contacts-form__input,
+.contacts-form__textarea {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  background-color: #ffffff;
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  color: #161616;
+  outline: none;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
+}
+.contacts-form__input:focus,
+.contacts-form__textarea:focus {
+  background-color: #ffffff;
+}
+.contacts-form__input::-moz-placeholder,
+.contacts-form__textarea::-moz-placeholder {
+  font-family: 'Cinzel', serif;
+  color: #999999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.contacts-form__input::placeholder,
+.contacts-form__textarea::placeholder {
+  font-family: 'Cinzel', serif;
+  color: #999999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.contacts-form__textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+.contacts-form__btn {
+  width: 100%;
+  padding: 18px;
+  background-color: #d12d35;
+  color: #ffffff;
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background-color 0.2s ease;
+}
+.contacts-form__btn:hover {
+  background-color: rgb(179.6248031496, 38.6751968504, 45.5507874016);
+}
+.contacts-form__btn:active {
+  transform: translateY(1px);
+}
+
+.museum-hours,
+.now-on-view,
+.more-to-explore-online,
+.contacts {
+  position: relative;
+  z-index: 2;
+  background-color: #ffffff;
+}
+
+.contacts {
+  margin-bottom: 180px;
+}
+@media (min-width: 768px) {
+  .contacts {
+    margin-bottom: 359px;
+  }
+}
+
+.footer {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+}
+.footer__image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+  background-color: #111;
+  transition: height 0.2s ease;
+}
+@media (min-width: 768px) {
+  .footer__image {
+    height: 359px;
+  }
+}
+.footer__image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center 45%;
+  object-position: center 45%;
+} /*# sourceMappingURL=main.css.map */

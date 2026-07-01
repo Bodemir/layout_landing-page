@@ -1,0 +1,113 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+html {
+  scroll-behavior: smooth; // Вимога №10: плавний скрол
+}
+
+// Вимога №11: заборона скролу під меню
+.page:has(.page__menu:target) {
+  overflow: hidden;
+}
+
+.header {
+  box-sizing: border-box;
+  padding: v.$header-padding-mobile;
+  height: 100vh;
+  background-image: url(../../public/images/header-bg.png);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+
+  @include m.on-tablet {
+    background-image: url(../../public/images/header-bg.png);
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 5px;
+
+    @include m.on-tablet {
+      padding: v.$header-padding-tablet;
+    }
+  }
+
+  &__logo {
+    display: inline-block;
+    z-index: 5;
+    width: 64px; // Чітка ширина з Figma
+    height: 46px; // Чітка висота з Figma
+    opacity: 1;
+
+    img {
+      width: 100%; // Картинка займає всі 64px ширини контейнера
+      height: 100%; // Картинка займає всі 46px висоти контейнера
+      display: block;
+      object-fit: contain;
+    }
+  }
+
+  &__icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__title {
+    position: absolute;
+    top: 35%;
+    color: v.$color-white;
+    width: v.$title-width-mobile;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+
+    @include m.on-tablet {
+      width: v.$title-width-tablet;
+    }
+
+    @include m.on-tv {
+      width: v.$title-width-tv;
+      top: 30%;
+    }
+
+    h1 {
+      font-family: v.$font-accent;
+      font-size: v.$h1-size-mobile;
+
+      // ... інший код
+    }
+  }
+}
+
+// --- ВИПРАВЛЕНИЙ БЛОК МЕНЮ (Вимога №11 та №12) ---
+.menu {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Початково меню повністю сховане за правим краєм екрана */
+  width: 100%; /* Займає всю ширину екрана на мобільці */
+  height: 100vh; /* На всю висоту екрана */
+
+  // ВИПРАВЛЕНО: додано префікс v. та крапку з комою в кінці!
+  background-color: v.$color-red;
+
+  z-index: 100; /* Точно вище за твій білий щит секцій контенту (у якого z-index: 2) */
+  overflow-y: auto; /* Вимога №12: скрол, якщо меню вище за екран */
+  transition: right 0.4s ease; /* Плавний виїзд меню */
+
+  &:target {
+    right: 0; /* Меню плавно виїжджає на екран */
+  }
+
+  &__top {
+    position: sticky; /* Вимога №12: хрестик закриття завжди видимий при скролі */
+    top: 0;
+    z-index: 1;
+
+    // ВИПРАВЛЕНО: додано префікс v.
+    background-color: v.$color-red; /* Закриває собою контент, що скролиться під ним */
+  }
+}

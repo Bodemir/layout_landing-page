@@ -1,0 +1,25 @@
+@use 'mixins' as m;
+
+.icon {
+  display: block;
+  height: 24px;
+  width: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  &--phone {
+    background-image: url('../../public/icons/icon_phone.png');
+  }
+  &--menu {
+    background-image: url('../../public/icons/icon_menu.png');
+  }
+  &--close {
+    background-image: url('../../public/icons/icon_close.png');
+  }
+
+  @include m.on-tv {
+    // Додаємо префікс m.
+    height: 48px;
+    width: 48px;
+  }
+}

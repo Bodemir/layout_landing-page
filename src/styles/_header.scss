@@ -2,10 +2,9 @@
 @use 'mixins' as m;
 
 html {
-  scroll-behavior: smooth; // Вимога №10: плавний скрол
+  scroll-behavior: smooth;
 }
 
-// Вимога №11: заборона скролу під меню
 .page:has(.page__menu:target) {
   overflow: hidden;
 }
@@ -59,11 +58,13 @@ html {
   &__title {
     position: absolute;
     top: 35%;
+    left: 50%;
+    transform: translateX(-50%);
     color: v.$color-white;
     width: v.$title-width-mobile;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
+
+    right: auto;
+    margin: 0;
 
     @include m.on-tablet {
       width: v.$title-width-tablet;
@@ -77,37 +78,36 @@ html {
     h1 {
       font-family: v.$font-accent;
       font-size: v.$h1-size-mobile;
-
-      // ... інший код
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      width: 100%;
     }
   }
 }
 
-// --- ВИПРАВЛЕНИЙ БЛОК МЕНЮ (Вимога №11 та №12) ---
 .menu {
   position: fixed;
   top: 0;
-  right: -100%; /* Початково меню повністю сховане за правим краєм екрана */
-  width: 100%; /* Займає всю ширину екрана на мобільці */
-  height: 100vh; /* На всю висоту екрана */
+  right: -100%;
+  width: 100%;
+  height: 100vh;
 
-  // ВИПРАВЛЕНО: додано префікс v. та крапку з комою в кінці!
   background-color: v.$color-red;
 
-  z-index: 100; /* Точно вище за твій білий щит секцій контенту (у якого z-index: 2) */
-  overflow-y: auto; /* Вимога №12: скрол, якщо меню вище за екран */
-  transition: right 0.4s ease; /* Плавний виїзд меню */
+  z-index: 100;
+  overflow-y: auto;
+  transition: right 0.4s ease;
 
   &:target {
     right: 0; /* Меню плавно виїжджає на екран */
   }
 
   &__top {
-    position: sticky; /* Вимога №12: хрестик закриття завжди видимий при скролі */
+    position: sticky;
     top: 0;
     z-index: 1;
 
-    // ВИПРАВЛЕНО: додано префікс v.
-    background-color: v.$color-red; /* Закриває собою контент, що скролиться під ним */
+    background-color: v.$color-red;
   }
 }

@@ -2,23 +2,44 @@
 *,
 *::before,
 *::after {
-  box-sizing: border-box; /* Змушує паддінги рахуватися всередину ширини екрана */
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html,
-body {
+html {
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden; /* КРИТИЧНО: обрізає будь-який випадковий правий скролл */
-  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
+.page {
+  font-family: 'Cinzel', serif;
   color: #161616;
-  background-color: #ffffff;
+  background-color: #fff;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  /* ВИНЕСЕНЕ ПРАВИЛО З ТВОГО ТЗ (Пункт 11) */
+}
+.page:has(.page__menu:target) {
+  overflow: hidden; /* Забороняємо скрол сторінки, коли відкрите меню */
+  height: 100vh; /* Додаємо обов'язково, щоб зафіксувати висоту під розмір екрана */
+}
+
+.container {
+  width: 100%;
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 0 20px; /* Обов'язково залишаємо падінги, щоб на мобільних контент не лип до країв */
+}
+@media (min-width: 1260px) {
+  .container--wide {
+    max-width: 1260px; /* Перебиваємо 1020px на десктопах */
+    padding: 0; /* Прибираємо бокові падінги, щоб картинка встала в краї */
+  }
 }
 
 img {
@@ -27,27 +48,55 @@ img {
   display: block;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Інші твої секції... */
+.museum-hours,
+.now-on-view,
+.explore-online,
+.contacts {
+  position: relative;
+  z-index: 2;
+  background-color: #fff;
 }
 
-.page:has(.page__menu:target) {
-  overflow: hidden;
+.contacts {
+  margin-bottom: 180px;
+}
+@media (min-width: 768px) {
+  .contacts {
+    margin-bottom: 359px;
+  }
+}
+
+.icon {
+  display: block;
+  height: 24px;
+  width: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.icon--phone {
+  background-image: url('../../public/icons/icon_phone.png');
+}
+.icon--menu {
+  background-image: url('../../public/icons/icon_menu.png');
+}
+.icon--close {
+  background-image: url('../../public/icons/icon_close.png');
+}
+@media screen and (min-width: 1920px) {
+  .icon {
+    height: 48px;
+    width: 48px;
+  }
 }
 
 .header {
-  box-sizing: border-box;
   padding: 10px 20px;
   height: 100vh;
   background-image: url(../../public/images/header-bg.png);
   background-size: cover;
   background-position: center;
   position: relative;
-}
-@media screen and (min-width: 768px) {
-  .header {
-    background-image: url(../../public/images/header-bg.png);
-  }
 }
 .header__top {
   display: flex;
@@ -79,15 +128,71 @@ html {
   display: flex;
   align-items: center;
   gap: 20px;
+  position: relative;
+}
+.header__icons .icon {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+@media (min-width: 1024px) {
+  .header__icons .icon--phone:hover .phone-tooltip {
+    display: flex;
+  }
+}
+@media (min-width: 1024px) {
+  .header__icons .icon--menu:hover {
+    transform: scale(1.08);
+  }
+}
+.header__icons .phone-tooltip {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  right: calc(100% + 20px);
+  width: 344px;
+  background-color: transparent !important;
+  padding: 0 5px;
+  z-index: 200;
+  text-align: right;
+}
+.header__icons .phone-tooltip__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 14px;
+}
+.header__icons .phone-tooltip__item:last-child {
+  margin-bottom: 0;
+}
+.header__icons .phone-tooltip__name,
+.header__icons .phone-tooltip__number {
+  font-family: 'Cinzel', serif, sans-serif;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  line-height: 1.3;
+}
+.header__icons .phone-tooltip__name {
+  font-size: 16px;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+.header__icons .phone-tooltip__number {
+  font-size: 20px;
+  letter-spacing: 0.5px;
 }
 .header__title {
   position: absolute;
   top: 35%;
-  color: #ffffff;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
   width: 280px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  right: auto;
+  margin: 0;
 }
 @media screen and (min-width: 768px) {
   .header__title {
@@ -103,52 +208,34 @@ html {
 .header__title h1 {
   font-family: 'Cinzel', serif;
   font-size: 2.5rem;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .menu {
   position: fixed;
   top: 0;
-  right: -100%; /* Початково меню повністю сховане за правим краєм екрана */
-  width: 100%; /* Займає всю ширину екрана на мобільці */
-  height: 100vh; /* На всю висоту екрана */
+  right: -100%;
+  width: 100%;
+  height: 100vh;
   background-color: #d12d35;
-  z-index: 100; /* Точно вище за твій білий щит секцій контенту (у якого z-index: 2) */
-  overflow-y: auto; /* Вимога №12: скрол, якщо меню вище за екран */
-  transition: right 0.4s ease; /* Плавний виїзд меню */
+  z-index: 100;
+  overflow-y: auto;
+  transition: right 0.4s ease;
 }
 .menu:target {
-  right: 0; /* Меню плавно виїжджає на екран */
+  right: 0;
 }
 .menu__top {
-  position: sticky; /* Вимога №12: хрестик закриття завжди видимий при скролі */
+  position: sticky;
   top: 0;
   z-index: 1;
-  background-color: #d12d35; /* Закриває собою контент, що скролиться під ним */
+  background-color: #d12d35;
 }
 
-.icon {
-  display: block;
-  height: 24px;
-  width: 24px;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.icon--phone {
-  background-image: url('../../public/icons/icon_phone.png');
-}
-.icon--menu {
-  background-image: url('../../public/icons/icon_menu.png');
-}
-.icon--close {
-  background-image: url('../../public/icons/icon_close.png');
-}
-@media screen and (min-width: 1920px) {
-  .icon {
-    height: 48px;
-    width: 48px;
-  }
-}
-
+/* Тепер без червоної стрілочки */
 .menu {
   position: fixed;
   top: 0;
@@ -188,7 +275,7 @@ html {
 .menu .nav__link {
   font-family: 'Cinzel', serif;
   font-size: 22px;
-  color: #ffffff;
+  color: #fff;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 700;
@@ -204,7 +291,7 @@ html {
   line-height: 27px;
 }
 .menu__met-bottom-title {
-  color: #ffffff;
+  color: #fff;
   font-family: 'Cinzel', serif;
   font-size: 16px;
   text-transform: uppercase;
@@ -214,7 +301,7 @@ html {
 }
 .menu__phone-number {
   display: block;
-  color: #ffffff;
+  color: #fff;
   font-family: 'Cinzel', serif;
   font-weight: 700;
   font-size: 18px;
@@ -228,12 +315,12 @@ html {
   display: inline-block;
   width: -moz-fit-content;
   width: fit-content;
-  color: #ffffff;
+  color: #fff;
   font-family: 'Cinzel', serif;
   font-size: 14px;
   text-transform: uppercase;
   text-decoration: none;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: 1px solid #fff;
   padding-bottom: 11px;
   margin-top: 10px;
   cursor: pointer;
@@ -242,12 +329,21 @@ html {
   font-weight: 700;
 }
 
+/* Тепер без червоної стрілочки */
 .museum-hours {
   padding: 40px 20px;
 }
 .museum-hours__header {
   text-align: center;
   margin-bottom: 40px;
+}
+@media (min-width: 768px) {
+  .museum-hours__header {
+    text-align: right;
+    margin-bottom: 0;
+    max-width: 300px;
+    width: 100%;
+  }
 }
 .museum-hours__subtitle {
   font-size: 12px;
@@ -266,116 +362,155 @@ html {
   margin: 0 auto;
   font-family: 'Cinzel', serif;
 }
-
-.museum-location {
-  margin-bottom: 30px;
+@media (min-width: 768px) {
+  .museum-hours__content {
+    max-width: none;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 288px;
+    min-width: 288px;
+    flex-shrink: 0;
+  }
 }
-.museum-location:last-child {
-  margin-bottom: 0;
+@media (min-width: 1024px) {
+  .museum-hours__content {
+    width: 516px;
+    max-width: 516px;
+  }
 }
-.museum-location__title {
-  font-size: 24px;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin-bottom: 20px;
-  letter-spacing: 0.5px;
-  text-align: center;
-}
-.museum-location__row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 12px;
-  font-size: 16px;
-}
-.museum-location__time,
-.museum-location__status {
-  font-weight: 700;
-  flex-shrink: 0;
-  width: 110px;
-}
-.museum-location__days {
-  text-transform: uppercase;
-  color: #161616;
-  text-align: left;
-  flex-grow: 1;
-}
-.museum-location__holidays {
-  margin-top: 25px;
-}
-.museum-location__holidays h4 {
-  font-size: 14px;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin-bottom: 5px;
-}
-.museum-location__holidays p {
-  font-size: 14px;
-  line-height: 1.4;
-  text-transform: uppercase;
-  color: #161616;
+@media (min-width: 768px) {
+  .museum-hours {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    max-width: 1260px;
+    margin: 0 auto;
+  }
 }
 
 .now-on-view {
   padding: 40px 20px;
 }
-.now-on-view__header {
-  text-align: center;
-  margin-bottom: 40px;
-}
 .now-on-view__title {
-  font-family: 'Cinzel', serif;
+  font-family: 'Cinzel', serif; /* ШРИФТ ДЛЯ "Now on view" */
   font-size: 32px;
+  font-weight: 700;
+  color: #161616;
+  margin-bottom: 8px;
   text-transform: uppercase;
-  margin-top: 5px;
-  max-width: 100%;
+  text-align: center;
 }
 .now-on-view__exhibitions {
-  text-transform: uppercase;
+  font-family: 'Cinzel', serif;
   font-size: 16px;
   font-weight: 400;
+  color: #161616;
+  margin-bottom: 40px;
   text-align: center;
+  text-transform: uppercase;
+  line-height: 1.4;
+  width: 100%;
+  max-width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 768px) {
+  .now-on-view__exhibitions {
+    max-width: 392px;
+  }
+}
+@media (min-width: 1024px) {
+  .now-on-view__exhibitions {
+    max-width: 498px;
+  }
 }
 
-.museum-location__row {
+/* Блок дій (Кнопка) */
+.exhibition-actions {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 12px;
-  font-size: 16px;
+  justify-content: center;
+  margin-top: 40px;
+}
+.exhibition-actions__btn {
+  width: 100%;
+  padding: 18px;
+  background-color: #d12d35;
+  color: #fff;
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background-color 0.2s ease;
+}
+@media (min-width: 768px) {
+  .exhibition-actions__btn {
+    width: 392px;
+    max-width: 392px;
+    height: 56px;
+  }
+}
+@media (min-width: 1260px) {
+  .exhibition-actions__btn {
+    width: 324px;
+    max-width: 324px;
+    height: 56px;
+  }
+}
+.exhibition-actions__btn:hover {
+  background-color: rgb(179.6248031496, 38.6751968504, 45.5507874016);
+}
+.exhibition-actions__btn:active {
+  transform: translateY(1px);
 }
 
+/* Велика картка (Колаж + Портрет) — ЗАВЖДИ В ОДИН РЯДОК */
 .exhibition-card {
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: stretch;
   width: 100%;
   max-width: 1020px;
-  margin: 0 auto;
+  margin: 0 auto 20px; /* Великий відступ між виставками */
+  margin-top: 50px;
+}
+@media (min-width: 768px) {
+  .exhibition-card {
+    gap: 20px;
+  }
 }
 .exhibition-card__collage {
-  flex: 0 0 66.666%;
-  aspect-ratio: 2/1;
-  background-image: url('/public/images/exhibition-collage.png');
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  background-position: 45% center;
-  border-right: 20px solid #ffffff;
-  cursor: pointer;
-  transition: background-size 0.4s ease;
+  flex: 0 0 calc(66.65% - 7.5px);
+  min-width: 0;
+  overflow: hidden;
 }
-.exhibition-card__collage:hover {
-  background-size: 105% auto;
+@media (min-width: 768px) {
+  .exhibition-card__collage {
+    flex: 0 0 calc(66.65% - 10px);
+  }
 }
 .exhibition-card__portrait {
-  flex: 0 0 33.333%;
-  aspect-ratio: 1/1;
+  flex: 0 0 calc(33.35% - 7.5px);
+  min-width: 0;
+  min-height: 0;
   overflow: hidden;
+}
+@media (min-width: 768px) {
+  .exhibition-card__portrait {
+    flex: 0 0 calc(33.35% - 10px);
+  }
 }
 .exhibition-card__link {
   display: block;
   width: 100%;
   height: 100%;
-  overflow: hidden;
 }
 .exhibition-card__img {
   width: 100%;
@@ -386,81 +521,55 @@ html {
   transition: transform 0.4s ease;
 }
 .exhibition-card__img:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 .exhibition-card__info {
-  text-transform: uppercase;
-  font-family: 'Cinzel', serif;
-  text-align: left;
+  margin-top: 15px; /* Відступ тексту від картинок */
 }
 .exhibition-card__title {
-  color: #d12d35;
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
   font-weight: 700;
+  color: #d12d35;
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+.exhibition-card__date {
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #161616;
+  text-transform: uppercase;
+  margin: 0;
 }
 
+/* Ряди з маленькими картинками (3 або 2 в ряд) */
 .exhibition-row {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  width: 100%;
-  max-width: 1020px;
-  margin: 0 auto 40px;
+  gap: 20px; /* Відступи між картинками */
 }
 .exhibition-row .exhibition-thumb {
-  flex: 1;
-  overflow: hidden;
-}
-.exhibition-row .exhibition-thumb__link {
-  display: block;
-  width: 100%;
-  height: 100%;
+  flex: 1; /* Рівномірно ділять ширину */
   overflow: hidden;
 }
 .exhibition-row .exhibition-thumb__img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
   display: block;
   transition: transform 0.4s ease;
 }
 .exhibition-row .exhibition-thumb__img:hover {
-  transform: scale(1.05);
-}
-
-.exhibition-actions {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
-  width: 100%;
-}
-
-.btn-primary {
-  display: inline-block;
-  background-color: #d12d35;
-  color: #ffffff;
-  font-family: 'Cinzel', serif;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-size: 16px;
-  letter-spacing: 1.5px;
-  font-weight: 700;
-  padding: 15px 30px;
-  text-align: center;
-  transition: background-color 0.2s ease;
-}
-.btn-primary:hover {
-  background-color: #a82326;
-  cursor: pointer;
+  transform: scale(1.04);
 }
 
 .explore-online {
   padding: 40px 20px;
-  position: relative;
-  z-index: 2;
-  background-color: #ffffff;
 }
 .explore-online__header {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 .explore-online__title {
   font-family: 'Cinzel', serif;
@@ -474,47 +583,45 @@ html {
   gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
-  position: relative;
-  z-index: 2;
 }
 @media (max-width: 768px) {
   .explore-online__row {
     flex-direction: column;
     align-items: center;
     padding: 0 10px;
+    gap: 40px;
   }
 }
 
 .explore-card {
   display: flex;
-  flex-direction: column; /* КРИТИЧНО: змушує картинку, заголовок і текст іти зверху вниз */
-  align-items: center; /* Центрує всі елементи всередині картки */
-  text-align: center; /* Центрує текст всередині рядків */
-  width: 100%; /* Картка адаптується під ширину екрана */
-  max-width: 280px; /* Обмежуємо максимальну ширину картки за Figma */
-  margin: 0 auto 40px auto; /* Центрує саму картку на екрані та робить відступ знизу */
-  /* Переносимо мобільний адаптив сюди, щоб він був нижче за max-width: 280px і міг його перевизначити */
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
 }
 @media (max-width: 768px) {
   .explore-card {
-    max-width: 100%;
+    max-width: 340px;
   }
 }
-.explore-card {
-  /* ОБГОРТКА ДЛЯ КАРТИНКИ (В HTML це має бути тег <a href="#" class="explore-card__thumb">) */
-}
 .explore-card__thumb {
-  display: block; /* Робимо блочним, щоб посилання адекватно тримало розміри */
-  width: 100%; /* Робимо адаптивною */
-  max-width: 280px; /* Але тримає ліміт з Figma */
-  height: 277px; /* Чітка висота з Figma */
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  height: 277px;
   margin-bottom: 20px;
-  overflow: hidden; /* Стримує картинку всередині при збільшенні */
-  flex-shrink: 0; /* Забороняє браузеру стискати контейнер картини */
-  cursor: pointer; /* Вказівний палець при наведенні */
+  overflow: hidden;
+  flex-shrink: 0;
+  cursor: pointer;
+  position: relative;
 }
-.explore-card {
-  /* САМА КАРТИНКА */
+@media (max-width: 768px) {
+  .explore-card__thumb {
+    max-width: 100%;
+  }
 }
 .explore-card__img {
   width: 100%;
@@ -524,26 +631,19 @@ html {
   object-fit: cover;
   -o-object-position: center;
   object-position: center;
-  transition: 0.4s ease; /* ДОДАНО: плавна анімація збільшення */
-  /* ДОДАНО: ефект збільшення при наведенні мишки */
+  transition: transform 0.4s ease;
 }
 .explore-card__img:hover {
-  transform: scale(1.05); /* Збільшення на 5% */
-}
-.explore-card {
-  /* ЗАГОЛОВОК КАРТКИ */
+  transform: scale(1.05);
 }
 .explore-card__title {
   font-family: 'Cinzel', serif;
   font-size: 22px;
   text-transform: uppercase;
   color: #d12d35;
-  margin: 0 0 12px 0; /* Зануляємо дефолтні марджини браузера, лишаємо тільки знизу */
+  margin: 0 0 12px;
   letter-spacing: 1px;
-  width: 100%; /* Займає всю ширину картки */
-}
-.explore-card {
-  /* ТЕКСТ КАРТКИ */
+  width: 100%;
 }
 .explore-card__text {
   font-family: 'Roboto', sans-serif;
@@ -551,13 +651,13 @@ html {
   line-height: 1.6;
   color: #161616;
   font-weight: 400;
-  margin: 0; /* Скидаємо дефолтні відступи браузера */
+  margin: 0;
   max-width: 100%;
 }
 
 .contacts {
   padding: 60px 20px;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 .contacts__container {
   max-width: 1200px;
@@ -570,6 +670,7 @@ html {
   text-transform: uppercase;
   margin-bottom: 40px;
   letter-spacing: 1px;
+  text-align: center;
 }
 .contacts__content {
   display: flex;
@@ -651,7 +752,7 @@ html {
 .contacts-branch__address-link:hover {
   color: #d12d35;
 }
-.contacts-branch__link--phone {
+.contacts-branch--phone {
   font-weight: bold;
   font-size: 16px;
 }
@@ -666,12 +767,11 @@ html {
 .contacts-form__group {
   width: 100%;
 }
-.contacts-form__input,
-.contacts-form__textarea {
+.contacts-form__input {
   width: 100%;
   padding: 16px 20px;
   border: none;
-  background-color: #ffffff;
+  background-color: #fff;
   font-family: 'Cinzel', serif;
   font-size: 16px;
   color: #161616;
@@ -679,33 +779,55 @@ html {
   box-sizing: border-box;
   transition: background-color 0.2s ease;
 }
-.contacts-form__input:focus,
-.contacts-form__textarea:focus {
-  background-color: #ffffff;
+.contacts-form__input:focus {
+  background-color: #fff;
 }
-.contacts-form__input::-moz-placeholder,
-.contacts-form__textarea::-moz-placeholder {
+.contacts-form__input::-moz-placeholder {
   font-family: 'Cinzel', serif;
-  color: #999999;
+  color: #999;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-.contacts-form__input::placeholder,
-.contacts-form__textarea::placeholder {
+.contacts-form__input::placeholder {
   font-family: 'Cinzel', serif;
-  color: #999999;
+  color: #999;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 .contacts-form__textarea {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  background-color: #fff;
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  color: #161616;
+  outline: none;
+  box-sizing: border-box;
+  transition: background-color 0.2s ease;
   resize: vertical;
   min-height: 150px;
+}
+.contacts-form__textarea:focus {
+  background-color: #fff;
+}
+.contacts-form__textarea::-moz-placeholder {
+  font-family: 'Cinzel', serif;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.contacts-form__textarea::placeholder {
+  font-family: 'Cinzel', serif;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 .contacts-form__btn {
   width: 100%;
   padding: 18px;
   background-color: #d12d35;
-  color: #ffffff;
+  color: #fff;
   font-family: 'Cinzel', serif;
   font-size: 18px;
   text-transform: uppercase;
@@ -722,24 +844,7 @@ html {
   transform: translateY(1px);
 }
 
-.museum-hours,
-.now-on-view,
-.more-to-explore-online,
-.contacts {
-  position: relative;
-  z-index: 2;
-  background-color: #ffffff;
-}
-
-.contacts {
-  margin-bottom: 180px;
-}
-@media (min-width: 768px) {
-  .contacts {
-    margin-bottom: 359px;
-  }
-}
-
+/* Тепер без червоної стрілочки */
 .footer {
   width: 100%;
   position: fixed;
@@ -752,12 +857,12 @@ html {
   height: 180px;
   overflow: hidden;
   position: relative;
-  background-color: #111;
+  background-color: #161616;
   transition: height 0.2s ease;
 }
 @media (min-width: 768px) {
   .footer__image {
-    height: 359px;
+    height: 359px; /* Висота з Figma, і вона триматиметься на десктопах */
   }
 }
 .footer__image img {
@@ -766,6 +871,6 @@ html {
   display: block;
   -o-object-fit: cover;
   object-fit: cover;
-  -o-object-position: center 45%;
-  object-position: center 45%;
+  -o-object-position: center center;
+  object-position: center center;
 } /*# sourceMappingURL=main.css.map */

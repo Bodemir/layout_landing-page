@@ -1,66 +1,11 @@
 @import 'variables';
 @import 'mixins';
-
-// _page.scss або вгорі main.scss
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box; /* Змушує паддінги рахуватися всередину ширини екрана */
-  margin: 0;
-  padding: 0;
-}
-
-html,
-body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden; /* КРИТИЧНО: обрізає будь-який випадковий правий скролл */
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  font-family: $font-main;
-  color: $color-main-dark;
-  background-color: $color-white;
-}
-
-// ----------------------------------------------------
-
-// Загальне правило для картинки, щоб вони не вилітали за межі батьківських блоків
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-// 3. Компоненти (твої блоки)
-@import 'header';
+@import 'global';
 @import 'icons';
+@import 'header';
 @import 'nav';
-
-// 4. Секції та футер
 @import 'museum-hours';
 @import 'now-on-view';
-@import 'more-to-explore-online';
+@import 'explore-online';
 @import 'contacts';
-
-.museum-hours,
-.now-on-view,
-.more-to-explore-online,
-.contacts {
-  position: relative;
-  z-index: 2;
-  background-color: $color-white; // Це твій білий щит, який закриє футер
-}
-
-// А відступ для виїзду футера даємо ТІЛЬКИ останній секції перед ним
-.contacts {
-  margin-bottom: 180px;
-
-  @media (min-width: 768px) {
-    margin-bottom: 359px;
-  }
-}
-
 @import 'footer';

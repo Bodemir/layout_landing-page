@@ -1,5 +1,3 @@
-@use 'mixins' as m;
-
 .icon {
   display: block;
   height: 24px;
@@ -17,7 +15,7 @@
     background-image: url('../../public/icons/icon_close.png');
   }
 
-  @include m.on-tv {
+  @include on-tv {
     // Додаємо префікс m.
     height: 48px;
     width: 48px;

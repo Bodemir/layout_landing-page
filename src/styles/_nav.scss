@@ -1,114 +1,102 @@
-@use 'variables' as v;
-
 .menu {
-  position: fixed; // Без змін
-  top: 0; // Без змін
-  right: 0; // Без змін
-  width: 100%; // Без змін
-  max-width: 100%; // Без змін
-  height: 100vh; // Без змін
-  background-color: v.$color-red; // Без змін
-  display: flex; // Без змін
-  flex-direction: column; // Без змін
-  z-index: 1000; // Без змін
-  padding: 30px; // Додано крапку з комою (була відсутня)
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  background-color: $color-red;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  padding: 30px;
   box-sizing: border-box;
 
-  transform: translateX(100%); // Без змін
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); // Без змін
+  transform: translateX(100%);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 
   &:target {
-    // Без змін
-    transform: translateX(0); // Без змін
+    transform: translateX(0);
   }
 
   &__header {
-    // Без змін
-    display: flex; // Без змін
-    justify-content: space-between; // Без змін
-    align-items: center; // Без змін
-    margin-bottom: 60px; // Без змін
-    width: 100%; // Без змін
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 60px;
+    width: 100%;
   }
 
   .nav {
-    // Без змін
-    margin-bottom: 30px; // Без змін
+    margin-bottom: 30px;
 
     &__list {
-      // Без змін
-      list-style: none; // Без змін
-      padding: 0; // Без змін
-      display: flex; // Без змін
-      flex-direction: column; // Без змін
-      gap: 20px; // Без змін
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
 
     &__link {
-      // Без змін
-      font-family: v.$font-accent; // Без змін
-      font-size: 22px; // Без змін
-      color: v.$color-white; // Без змін
-      text-decoration: none; // Без змін
-      text-transform: uppercase; // Без змін
-      font-weight: 700; // Додано жирність (для відповідності макету)
+      font-family: $font-accent;
+      font-size: 22px;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 700;
     }
   }
 
   &__header--bottom {
-    // Контейнер тепер правильно вкладений в .menu
-    margin-top: auto; // Без змін
-    width: 100%; // Без змін
-    margin-left: -10px; // Виправлено: компенсуємо padding батька (30px) для отримання чистого left: 20px
-    margin-bottom: 30px; // Без змін
-    opacity: 1; // Без змін
-    display: flex; // Без змін
-    flex-direction: column; // Без змін
+    margin-top: auto;
+    width: 100%;
+    margin-left: -10px;
+    margin-bottom: 30px;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
     line-height: 27px;
   }
 
   &__met-bottom-title {
-    // Додано в блок .menu (раніше була закрита дужка перед цим)
-    color: v.$color-white; // Без змін
-    font-family: v.$font-accent; // Без змін
-    font-size: 16px; // Без змін
-    text-transform: uppercase; // Без змін
-    margin: 0; // Без змін
-    line-height: 1.2; // Без змін
+    color: $color-white;
+    font-family: $font-accent;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.2;
     font-weight: 700;
   }
 
   &__phone-number {
-    // Додано в блок .menu
-    display: block; // Без змін
-    color: v.$color-white; // Без змін
-    font-family: v.$font-accent; // Без змін
-    font-weight: 700; // Без змін
-    font-size: 18px; // Без змін
-    text-decoration: none; // Без змін
-    margin-top: 10px; // Без змін
+    display: block;
+    color: $color-white;
+    font-family: $font-accent;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+    margin-top: 10px;
 
     &:hover {
-      // Без змін
-      text-decoration: underline; // Без змін
+      text-decoration: underline;
     }
   }
 
   &__call-to-order {
-    // Додано в блок .menu
     display: inline-block;
     width: fit-content;
-    color: v.$color-white; // Без змін
-    font-family: v.$font-accent; // Без змін
-    font-size: 14px; // Без змін
-    text-transform: uppercase; // Без змін
+    color: $color-white;
+    font-family: $font-accent;
+    font-size: 14px;
+    text-transform: uppercase;
     text-decoration: none;
-    border-bottom: 1px solid v.$color-white;
+    border-bottom: 1px solid $color-white;
     padding-bottom: 11px;
-    margin-top: 10px; // Без змін
-    cursor: pointer; // Без змін
+    margin-top: 10px;
+    cursor: pointer;
     opacity: 1 !important;
     visibility: visible !important;
     font-weight: 700;
   }
-} // Ця дужка тепер закриває весь блок .menu (раніше вона закривалася занадто рано)
+}

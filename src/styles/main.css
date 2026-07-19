@@ -22,23 +22,22 @@ html {
   max-width: 100%;
   overflow-x: hidden;
   position: relative;
-  /* ВИНЕСЕНЕ ПРАВИЛО З ТВОГО ТЗ (Пункт 11) */
 }
 .page:has(.page__menu:target) {
-  overflow: hidden; /* Забороняємо скрол сторінки, коли відкрите меню */
-  height: 100vh; /* Додаємо обов'язково, щоб зафіксувати висоту під розмір екрана */
+  overflow: hidden;
+  height: 100vh;
 }
 
 .container {
   width: 100%;
   max-width: 1020px;
   margin: 0 auto;
-  padding: 0 20px; /* Обов'язково залишаємо падінги, щоб на мобільних контент не лип до країв */
+  padding: 0 20px;
 }
 @media (min-width: 1260px) {
   .container--wide {
-    max-width: 1260px; /* Перебиваємо 1020px на десктопах */
-    padding: 0; /* Прибираємо бокові падінги, щоб картинка встала в краї */
+    max-width: 1260px;
+    padding: 0;
   }
 }
 
@@ -48,7 +47,6 @@ img {
   display: block;
 }
 
-/* Інші твої секції... */
 .museum-hours,
 .now-on-view,
 .explore-online,
@@ -116,6 +114,7 @@ img {
   width: 64px;
   height: 46px;
   opacity: 1;
+  margin-bottom: 24px;
 }
 .header__logo img {
   width: 100%;
@@ -145,6 +144,15 @@ img {
     transform: scale(1.08);
   }
 }
+.header__icons .icon--close {
+  margin-left: 25px;
+  z-index: 100;
+}
+@media (min-width: 1024px) {
+  .header__icons .icon--close:hover {
+    transform: scale(1.08);
+  }
+}
 .header__icons .phone-tooltip {
   display: none;
   flex-direction: column;
@@ -169,7 +177,7 @@ img {
 .header__icons .phone-tooltip__name,
 .header__icons .phone-tooltip__number {
   font-family: 'Cinzel', serif, sans-serif;
-  color: #ffffff !important;
+  color: #fff !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
   text-decoration: none !important;
@@ -217,13 +225,47 @@ img {
 .menu {
   position: fixed;
   top: 0;
-  right: -100%;
+  right: -1000%;
   width: 100%;
   height: 100vh;
   background-color: #d12d35;
   z-index: 100;
   overflow-y: auto;
   transition: right 0.4s ease;
+  padding-left: 2.5rem;
+  padding-top: 2.5rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .menu {
+    padding-left: 121px;
+    padding-top: 60px;
+    padding-right: 30px;
+  }
+}
+.menu .icon--close {
+  position: absolute;
+  top: -4.8rem;
+  right: -1rem;
+  z-index: 101;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (min-width: 768px) {
+  .menu .icon--close {
+    top: -5rem;
+    right: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .menu .icon--close {
+    top: -5rem;
+    right: 2rem;
+  }
 }
 .menu:target {
   right: 0;
@@ -233,44 +275,18 @@ img {
   top: 0;
   z-index: 1;
   background-color: #d12d35;
-}
-
-/* Тепер без червоної стрілочки */
-.menu {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  max-width: 100%;
-  height: 100vh;
-  background-color: #d12d35;
-  display: flex;
-  flex-direction: column;
-  z-index: 1000;
-  padding: 30px;
-  box-sizing: border-box;
-  transform: translateX(100%);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.menu:target {
-  transform: translateX(0);
-}
-.menu__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 60px;
-  width: 100%;
+  margin-bottom: 24px;
 }
 .menu .nav {
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 .menu .nav__list {
   list-style: none;
   padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 .menu .nav__link {
   font-family: 'Cinzel', serif;
@@ -279,16 +295,22 @@ img {
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 700;
+  display: inline-block;
 }
 .menu__header--bottom {
-  margin-top: auto;
+  margin-top: 0;
   width: 100%;
-  margin-left: -10px;
-  margin-bottom: 30px;
+  margin-left: 0;
+  margin-bottom: 50px;
   opacity: 1;
   display: flex;
   flex-direction: column;
-  line-height: 27px;
+  gap: 15px;
+}
+.menu__contact-group {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.4;
 }
 .menu__met-bottom-title {
   color: #fff;
@@ -296,8 +318,8 @@ img {
   font-size: 16px;
   text-transform: uppercase;
   margin: 0;
-  line-height: 1.2;
   font-weight: 700;
+  letter-spacing: 0.5px;
 }
 .menu__phone-number {
   display: block;
@@ -306,7 +328,7 @@ img {
   font-weight: 700;
   font-size: 18px;
   text-decoration: none;
-  margin-top: 10px;
+  margin-top: 4px;
 }
 .menu__phone-number:hover {
   text-decoration: underline;
@@ -321,15 +343,14 @@ img {
   text-transform: uppercase;
   text-decoration: none;
   border-bottom: 1px solid #fff;
-  padding-bottom: 11px;
-  margin-top: 10px;
+  padding-bottom: 4px;
+  margin-top: 15px;
   cursor: pointer;
   opacity: 1 !important;
   visibility: visible !important;
   font-weight: 700;
 }
 
-/* Тепер без червоної стрілочки */
 .museum-hours {
   padding: 40px 20px;
 }
@@ -386,7 +407,7 @@ img {
     justify-content: center;
     align-items: flex-start;
     gap: 50px;
-    max-width: 1260px;
+    min-width: 1260px;
     margin: 0 auto;
   }
 }
@@ -395,7 +416,7 @@ img {
   padding: 40px 20px;
 }
 .now-on-view__title {
-  font-family: 'Cinzel', serif; /* ШРИФТ ДЛЯ "Now on view" */
+  font-family: 'Cinzel', serif;
   font-size: 32px;
   font-weight: 700;
   color: #161616;
@@ -463,13 +484,12 @@ img {
   }
 }
 .exhibition-actions__btn:hover {
-  background-color: rgb(179.6248031496, 38.6751968504, 45.5507874016);
+  background-color: #a82326;
 }
 .exhibition-actions__btn:active {
   transform: translateY(1px);
 }
 
-/* Велика картка (Колаж + Портрет) — ЗАВЖДИ В ОДИН РЯДОК */
 .exhibition-card {
   display: flex;
   flex-direction: row;
@@ -478,7 +498,7 @@ img {
   align-items: stretch;
   width: 100%;
   max-width: 1020px;
-  margin: 0 auto 20px; /* Великий відступ між виставками */
+  margin: 0 auto 20px;
   margin-top: 50px;
 }
 @media (min-width: 768px) {
@@ -524,7 +544,7 @@ img {
   transform: scale(1.03);
 }
 .exhibition-card__info {
-  margin-top: 15px; /* Відступ тексту від картинок */
+  margin-top: 15px;
 }
 .exhibition-card__title {
   font-family: 'Cinzel', serif;
@@ -543,13 +563,12 @@ img {
   margin: 0;
 }
 
-/* Ряди з маленькими картинками (3 або 2 в ряд) */
 .exhibition-row {
   display: flex;
-  gap: 20px; /* Відступи між картинками */
+  gap: 20px;
 }
 .exhibition-row .exhibition-thumb {
-  flex: 1; /* Рівномірно ділять ширину */
+  flex: 1;
   overflow: hidden;
 }
 .exhibition-row .exhibition-thumb__img {
@@ -680,16 +699,33 @@ img {
 }
 @media (min-width: 768px) {
   .contacts__content {
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: start;
   }
 }
-.contacts__address {
-  font-family: 'Cinzel', serif;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 16px;
+@media (min-width: 1024px) {
+  .contacts__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 30px;
+  }
+}
+.contacts-branches {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+}
+@media (min-width: 1024px) {
+  .contacts-branches {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 65%;
+  }
 }
 .contacts__maps-link {
   color: inherit;
@@ -706,7 +742,13 @@ img {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-width: 320px;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .contacts-branch {
+    align-items: flex-start;
+    text-align: left;
+  }
 }
 .contacts-branch__name {
   font-family: 'Cinzel', serif;
@@ -731,7 +773,7 @@ img {
   font-size: 14px;
   font-weight: 400;
   text-transform: uppercase;
-  color: rgb(98.5, 98.5, 98.5);
+  color: #161616;
   margin-bottom: 6px;
   letter-spacing: 1px;
 }
@@ -762,38 +804,22 @@ img {
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  max-width: 400px;
+  max-width: 380px;
+}
+@media (min-width: 768px) {
+  .contacts-form {
+    justify-self: end;
+  }
+}
+@media (min-width: 1024px) {
+  .contacts-form {
+    width: 30%;
+  }
 }
 .contacts-form__group {
   width: 100%;
 }
-.contacts-form__input {
-  width: 100%;
-  padding: 16px 20px;
-  border: none;
-  background-color: #fff;
-  font-family: 'Cinzel', serif;
-  font-size: 16px;
-  color: #161616;
-  outline: none;
-  box-sizing: border-box;
-  transition: background-color 0.2s ease;
-}
-.contacts-form__input:focus {
-  background-color: #fff;
-}
-.contacts-form__input::-moz-placeholder {
-  font-family: 'Cinzel', serif;
-  color: #999;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.contacts-form__input::placeholder {
-  font-family: 'Cinzel', serif;
-  color: #999;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+.contacts-form__input,
 .contacts-form__textarea {
   width: 100%;
   padding: 16px 20px;
@@ -804,19 +830,25 @@ img {
   color: #161616;
   outline: none;
   box-sizing: border-box;
-  transition: background-color 0.2s ease;
-  resize: vertical;
-  min-height: 150px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+  resize: 90px;
+  min-height: 90px;
 }
+.contacts-form__input:focus,
 .contacts-form__textarea:focus {
   background-color: #fff;
+  border-color: #161616;
 }
+.contacts-form__input::-moz-placeholder,
 .contacts-form__textarea::-moz-placeholder {
   font-family: 'Cinzel', serif;
   color: #999;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
+.contacts-form__input::placeholder,
 .contacts-form__textarea::placeholder {
   font-family: 'Cinzel', serif;
   color: #999;
@@ -838,13 +870,12 @@ img {
   transition: background-color 0.2s ease;
 }
 .contacts-form__btn:hover {
-  background-color: rgb(179.6248031496, 38.6751968504, 45.5507874016);
+  background-color: #a82326;
 }
 .contacts-form__btn:active {
   transform: translateY(1px);
 }
 
-/* Тепер без червоної стрілочки */
 .footer {
   width: 100%;
   position: fixed;
@@ -862,7 +893,7 @@ img {
 }
 @media (min-width: 768px) {
   .footer__image {
-    height: 359px; /* Висота з Figma, і вона триматиметься на десктопах */
+    height: 359px;
   }
 }
 .footer__image img {

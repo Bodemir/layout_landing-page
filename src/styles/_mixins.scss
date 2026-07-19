@@ -6,7 +6,6 @@
 
 @mixin on-tablet {
   @media screen and (min-width: $tablet) {
-    // Беремо значення з variables
     @content;
   }
 }

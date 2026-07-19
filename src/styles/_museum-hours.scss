@@ -50,13 +50,12 @@
     }
   }
 
-  // Головний контейнер
   @media (min-width: 768px) {
     display: flex;
     justify-content: center;
     align-items: flex-start;
     gap: 50px;
-    max-width: 1260px;
+    min-width: 1260px;
     margin: 0 auto;
   }
 }

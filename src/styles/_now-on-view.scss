@@ -71,7 +71,7 @@
     }
 
     &:hover {
-      background-color: color.adjust($color-red, 7%);
+      background-color: $color-dark-red;
     }
 
     &:active {
@@ -80,25 +80,24 @@
   }
 }
 
-/* Велика картка (Колаж + Портрет) — ЗАВЖДИ В ОДИН РЯДОК */
 .exhibition-card {
   display: flex;
-  flex-direction: row; // Ряд активний одразу з мобілки
+  flex-direction: row;
   justify-content: space-between;
-  gap: 15px; // менший відступ на мобілці, щоб усе влізло
+  gap: 15px;
   align-items: stretch;
   width: 100%;
   max-width: 1020px;
-  margin: 0 auto 20px; /* Великий відступ між виставками */
+  margin: 0 auto 20px;
   margin-top: 50px;
 
   @media (min-width: 768px) {
-    gap: 20px; // повертаємо 20px на планшетах і десктопах
+    gap: 20px;
   }
 
   &__collage {
     flex: 0 0 calc(66.65% - 7.5px);
-    min-width: 0; // захист від розпирання картинок
+    min-width: 0;
     overflow: hidden;
 
     @media (min-width: 768px) {
@@ -108,7 +107,7 @@
 
   &__portrait {
     flex: 0 0 calc(33.35% - 7.5px);
-    min-width: 0; // КРИТИЧНО: не дає портрету ламати флекси
+    min-width: 0;
     min-height: 0;
     overflow: hidden;
 
@@ -136,7 +135,7 @@
   }
 
   &__info {
-    margin-top: 15px; /* Відступ тексту від картинок */
+    margin-top: 15px;
   }
 
   &__title {
@@ -158,13 +157,12 @@
   }
 }
 
-/* Ряди з маленькими картинками (3 або 2 в ряд) */
 .exhibition-row {
   display: flex;
-  gap: 20px; /* Відступи між картинками */
+  gap: 20px;
 
   .exhibition-thumb {
-    flex: 1; /* Рівномірно ділять ширину */
+    flex: 1;
     overflow: hidden;
 
     &__img {

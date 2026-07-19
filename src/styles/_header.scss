@@ -24,6 +24,7 @@
     width: 64px;
     height: 46px;
     opacity: 1;
+    margin-bottom: 24px;
 
     img {
       width: 100%;
@@ -61,27 +62,36 @@
           }
         }
       }
+
+      &--close {
+        margin-left: 25px;
+
+        z-index: 100;
+
+        @media (min-width: 1024px) {
+          &:hover {
+            transform: scale(1.08);
+          }
+        }
+      }
     }
 
     .phone-tooltip {
       display: none;
       flex-direction: column;
-
       position: absolute;
       top: 0;
       right: calc(100% + 20px);
-
-      // РОЗМІРИ ТА ЧИСТИЙ ФОН
-      width: 344px; // Ширина з Figma
-      background-color: transparent !important; // ПОВНІСТЮ ПРОЗОРИЙ ФОН
-      padding: 0 5px; // Мінімальні відступи, щоб текст не ламався
+      width: 344px;
+      background-color: transparent !important;
+      padding: 0 5px;
       z-index: 200;
-      text-align: right; // Текст вирівняний по правому краю (ближче до іконки)
+      text-align: right;
 
       &__item {
         display: flex;
         flex-direction: column;
-        align-items: flex-end; // Притискаємо елементи всередині флексу праворуч
+        align-items: flex-end;
         margin-bottom: 14px;
 
         &:last-child {
@@ -89,7 +99,6 @@
         }
       }
 
-      // СУВОРІ СТИЛІ: КАРС, БОЛД, БІЛИЙ
       &__name,
       &__number {
         font-family: $font-accent, sans-serif;
@@ -111,7 +120,7 @@
         letter-spacing: 0.5px;
       }
     }
-  } // Кінець блоку __icons
+  }
 
   &__title {
     position: absolute;
@@ -140,28 +149,5 @@
       width: 100%;
       text-align: center;
     }
-  }
-} // Кінець блоку .header
-
-.menu {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 100%;
-  height: 100vh;
-  background-color: $color-red;
-  z-index: 100;
-  overflow-y: auto;
-  transition: right 0.4s ease;
-
-  &:target {
-    right: 0;
-  }
-
-  &__top {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    background-color: $color-red;
   }
 }

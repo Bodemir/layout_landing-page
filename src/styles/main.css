@@ -165,6 +165,14 @@ img {
   z-index: 200;
   text-align: right;
 }
+.header__icons .phone-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -20px;
+  width: 20px;
+  height: 100%;
+}
 .header__icons .phone-tooltip__item {
   display: flex;
   flex-direction: column;
@@ -191,6 +199,17 @@ img {
 .header__icons .phone-tooltip__number {
   font-size: 20px;
   letter-spacing: 0.5px;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+.header__icons .phone-tooltip:hover {
+  text-decoration: none !important;
+}
+.header__icons .phone-tooltip:active {
+  text-decoration: underline !important;
+  text-decoration-color: #fff !important;
 }
 .header__title {
   position: absolute;
@@ -722,7 +741,7 @@ img {
 @media (min-width: 1024px) {
   .contacts-branches {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 237px 237px;
     gap: 30px;
     width: 65%;
   }
@@ -813,18 +832,17 @@ img {
 }
 @media (min-width: 1024px) {
   .contacts-form {
-    width: 30%;
+    max-width: 885px;
   }
 }
 .contacts-form__group {
   width: 100%;
 }
-.contacts-form__input,
-.contacts-form__textarea {
+.contacts-form__input {
   width: 100%;
+  height: 48px;
   padding: 16px 20px;
   border: none;
-  background-color: #fff;
   font-family: 'Cinzel', serif;
   font-size: 16px;
   color: #161616;
@@ -833,22 +851,35 @@ img {
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease;
-  resize: 90px;
-  min-height: 90px;
+  resize: none;
+  background-color: #f8f8fa;
 }
-.contacts-form__input:focus,
+.contacts-form__textarea {
+  width: 100%;
+  height: 144px;
+  padding: 16px 20px;
+  border: none;
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  color: #161616;
+  outline: none;
+  box-sizing: border-box;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+  resize: none;
+  background-color: #f8f8fa;
+}
 .contacts-form__textarea:focus {
   background-color: #fff;
   border-color: #161616;
 }
-.contacts-form__input::-moz-placeholder,
 .contacts-form__textarea::-moz-placeholder {
   font-family: 'Cinzel', serif;
   color: #999;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-.contacts-form__input::placeholder,
 .contacts-form__textarea::placeholder {
   font-family: 'Cinzel', serif;
   color: #999;
@@ -869,11 +900,17 @@ img {
   letter-spacing: 1px;
   transition: background-color 0.2s ease;
 }
-.contacts-form__btn:hover {
-  background-color: #a82326;
-}
-.contacts-form__btn:active {
-  transform: translateY(1px);
+@media (min-width: 1024px) {
+  .contacts-form__btn {
+    max-width: 411px;
+    max-height: 56px;
+  }
+  .contacts-form__btn:hover {
+    background-color: #a82326;
+  }
+  .contacts-form__btn:active {
+    transform: translateY(1px);
+  }
 }
 
 .footer {

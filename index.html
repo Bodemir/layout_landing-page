@@ -53,18 +53,18 @@
         </a>
 
         <div class="header__icons">
-          <a href="tel:+12125357710" class="icon icon--phone">
+          <span class="icon icon--phone">
             <div class="phone-tooltip">
               <div class="phone-tooltip__item">
                 <span class="phone-tooltip__name">The Met Fifth Avenue</span>
-                <span class="phone-tooltip__number">+1 212-535-7710</span>
+                <a href="tel: 1 212-535-7710" class="phone-tooltip__number">+1 212-535-7710</a>
               </div>
               <div class="phone-tooltip__item">
                 <span class="phone-tooltip__name">The Met Cloisters</span>
-                <span class="phone-tooltip__number">+1 212-923-3700</span>
+                <a href="tel: +1 212-923-3700" class="phone-tooltip__number">+1 212-923-3700</a>
               </div>
             </div>
-          </a>
+          </span>
 
           <a href="#menu" class="icon icon--menu"></a>
         </div>
@@ -524,15 +524,17 @@
                 </div>
               </div>
             </div>
-            <form class="contacts-form" onsubmit="this.reset(); return false;">
+            <form class="contacts-form" onsubmit="this.reset(); return false;"
+            autocomplete="off">
 
               <div class="contacts-form__group">
                 <input
                 type="text"
                 id="form-name"
                 class="contacts-form__input"
-                placeholder="YOUR"
+                placeholder="NAME"
                 required
+              autocomplete="one-time-code"
               >
               </div>
 
@@ -543,6 +545,7 @@
                 class="contacts-form__input"
                 placeholder="EMAIL"
                 required
+                autocomplete="one-time-code"
               >
               </div>
 
@@ -553,6 +556,7 @@
                 placeholder="MESSAGE"
                 rows="6"
                 required
+                autocomplete="off"
               ></textarea>
               </div>
 

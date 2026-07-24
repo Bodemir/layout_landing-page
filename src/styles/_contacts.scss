@@ -213,7 +213,7 @@
     transition: background-color $transition-speed-fast $transition-ease;
 
     @media (min-width: 1024px) {
-      max-width: 411px;
+      min-width: 411px;
       max-height: 56px;
 
       &:hover {

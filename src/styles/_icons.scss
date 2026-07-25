@@ -6,14 +6,14 @@
   background-repeat: no-repeat;
 
   &--phone {
-    background-image: url('../../public/icons/icon_phone.png');
+    background-image: url('../../public/icons/icon_phone.svg');
   }
 
   &--menu {
-    background-image: url('../../public/icons/icon_menu.png');
+    background-image: url('../../public/icons/icon_menu.svg');
   }
   &--close {
-    background-image: url('../../public/icons/icon_close.png');
+    background-image: url('../../public/icons/icon_close.svg');
   }
 
   @include on-tv {

@@ -15,7 +15,7 @@ html {
 }
 
 .page {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   color: #161616;
   background-color: #fff;
   width: 100%;
@@ -73,13 +73,13 @@ img {
   background-repeat: no-repeat;
 }
 .icon--phone {
-  background-image: url("../../public/icons/icon_phone.png");
+  background-image: url('../../public/icons/icon_phone.svg');
 }
 .icon--menu {
-  background-image: url("../../public/icons/icon_menu.png");
+  background-image: url('../../public/icons/icon_menu.svg');
 }
 .icon--close {
-  background-image: url("../../public/icons/icon_close.png");
+  background-image: url('../../public/icons/icon_close.svg');
 }
 @media screen and (min-width: 1920px) {
   .icon {
@@ -121,7 +121,7 @@ img {
   height: 100%;
   display: block;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 .header__icons {
   display: flex;
@@ -166,7 +166,7 @@ img {
   text-align: right;
 }
 .header__icons .phone-tooltip::after {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   right: -20px;
@@ -182,8 +182,9 @@ img {
 .header__icons .phone-tooltip__item:last-child {
   margin-bottom: 0;
 }
-.header__icons .phone-tooltip__name, .header__icons .phone-tooltip__number {
-  font-family: "Cinzel", serif, sans-serif;
+.header__icons .phone-tooltip__name,
+.header__icons .phone-tooltip__number {
+  font-family: 'Cinzel', serif, sans-serif;
   color: #fff !important;
   font-weight: 700 !important;
   text-transform: uppercase !important;
@@ -199,7 +200,9 @@ img {
   font-size: 20px;
   letter-spacing: 0.5px;
   cursor: pointer;
-  transition: color 0.2s ease, opacity 0.2s ease;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
 .header__icons .phone-tooltip:hover {
   text-decoration: none !important;
@@ -230,7 +233,7 @@ img {
   }
 }
 .header__title h1 {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 2.5rem;
   margin: 0;
   padding: 0;
@@ -305,7 +308,7 @@ img {
   gap: 24px;
 }
 .menu .nav__link {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 22px;
   color: #fff;
   text-decoration: none;
@@ -330,7 +333,7 @@ img {
 }
 .menu__met-bottom-title {
   color: #fff;
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 16px;
   text-transform: uppercase;
   margin: 0;
@@ -340,7 +343,7 @@ img {
 .menu__phone-number {
   display: block;
   color: #fff;
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-weight: 700;
   font-size: 18px;
   text-decoration: none;
@@ -354,7 +357,7 @@ img {
   width: -moz-fit-content;
   width: fit-content;
   color: #fff;
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 14px;
   text-transform: uppercase;
   text-decoration: none;
@@ -368,7 +371,21 @@ img {
 }
 
 .museum-hours {
-  padding: 40px 20px;
+  padding: 40px 0;
+}
+.museum-hours .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+@media (min-width: 768px) {
+  .museum-hours .container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+  }
 }
 .museum-hours__header {
   text-align: center;
@@ -376,7 +393,7 @@ img {
 }
 @media (min-width: 768px) {
   .museum-hours__header {
-    text-align: right;
+    text-align: left;
     margin-bottom: 0;
     max-width: 300px;
     width: 100%;
@@ -389,7 +406,7 @@ img {
   font-weight: bold;
 }
 .museum-hours__title {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 32px;
   text-transform: uppercase;
   margin-top: 5px;
@@ -397,11 +414,11 @@ img {
 .museum-hours__content {
   max-width: 320px;
   margin: 0 auto;
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
 }
 @media (min-width: 768px) {
   .museum-hours__content {
-    max-width: none;
+    max-width: 480px;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -423,29 +440,29 @@ img {
     justify-content: center;
     align-items: flex-start;
     gap: 50px;
-    min-width: 1260px;
     margin: 0 auto;
   }
 }
 
 .now-on-view {
-  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
 }
 .now-on-view__title {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 32px;
   font-weight: 700;
   color: #161616;
-  margin-bottom: 8px;
   text-transform: uppercase;
   text-align: center;
 }
 .now-on-view__exhibitions {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 16px;
   font-weight: 400;
   color: #161616;
-  margin-bottom: 40px;
   text-align: center;
   text-transform: uppercase;
   line-height: 1.4;
@@ -465,18 +482,28 @@ img {
   }
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 24px;
+  width: 100%;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
 /* Блок дій (Кнопка) */
 .exhibition-actions {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  gap: 24px;
 }
 .exhibition-actions__btn {
   width: 100%;
   padding: 18px;
   background-color: #d12d35;
   color: #fff;
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 18px;
   text-transform: uppercase;
   font-weight: bold;
@@ -514,8 +541,6 @@ img {
   align-items: stretch;
   width: 100%;
   max-width: 1020px;
-  margin: 0 auto 20px;
-  margin-top: 50px;
 }
 @media (min-width: 768px) {
   .exhibition-card {
@@ -552,18 +577,15 @@ img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   display: block;
   transition: transform 0.4s ease;
 }
 .exhibition-card__img:hover {
   transform: scale(1.03);
 }
-.exhibition-card__info {
-  margin-top: 15px;
-}
 .exhibition-card__title {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 22px;
   font-weight: 700;
   color: #d12d35;
@@ -571,7 +593,7 @@ img {
   line-height: 1.3;
 }
 .exhibition-card__date {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 16px;
   font-weight: 400;
   color: #161616;
@@ -591,7 +613,7 @@ img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   display: block;
   transition: transform 0.4s ease;
 }
@@ -607,7 +629,7 @@ img {
   margin-bottom: 30px;
 }
 .explore-online__title {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 32px;
   text-transform: uppercase;
   margin-top: 5px;
@@ -663,16 +685,16 @@ img {
   height: 100%;
   display: block;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center;
-     object-position: center;
+  object-position: center;
   transition: transform 0.4s ease;
 }
 .explore-card__img:hover {
   transform: scale(1.05);
 }
 .explore-card__title {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 22px;
   text-transform: uppercase;
   color: #d12d35;
@@ -681,7 +703,7 @@ img {
   width: 100%;
 }
 .explore-card__text {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: #161616;
@@ -700,7 +722,7 @@ img {
   text-align: center;
 }
 .contacts__title {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 36px;
   text-transform: uppercase;
   margin-bottom: 40px;
@@ -767,7 +789,7 @@ img {
   }
 }
 .contacts-branch__name {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 20px;
   text-transform: uppercase;
   margin-bottom: 24px;
@@ -776,7 +798,7 @@ img {
 .contacts-branch__group {
   margin-bottom: 20px;
   width: 100%;
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -785,7 +807,7 @@ img {
 }
 .contacts-branch__label {
   display: block;
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 14px;
   font-weight: 400;
   text-transform: uppercase;
@@ -796,8 +818,9 @@ img {
 .contacts-branch__address {
   font-style: normal;
 }
-.contacts-branch__link, .contacts-branch__address-link {
-  font-family: "Cinzel", serif;
+.contacts-branch__link,
+.contacts-branch__address-link {
+  font-family: 'Cinzel', serif;
   font-size: 18px;
   color: #161616;
   text-decoration: none;
@@ -805,7 +828,8 @@ img {
   display: inline-block;
   transition: color 0.2s ease;
 }
-.contacts-branch__link:hover, .contacts-branch__address-link:hover {
+.contacts-branch__link:hover,
+.contacts-branch__address-link:hover {
   color: #d12d35;
 }
 .contacts-branch--phone {
@@ -838,12 +862,14 @@ img {
   height: 48px;
   padding: 16px 20px;
   border: none;
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 16px;
   color: #161616;
   outline: none;
   box-sizing: border-box;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
   resize: none;
   background-color: #f8f8fa;
 }
@@ -852,12 +878,14 @@ img {
   height: 144px;
   padding: 16px 20px;
   border: none;
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 16px;
   color: #161616;
   outline: none;
   box-sizing: border-box;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
   resize: none;
   background-color: #f8f8fa;
 }
@@ -866,13 +894,13 @@ img {
   border-color: #161616;
 }
 .contacts-form__textarea::-moz-placeholder {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   color: #999;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 .contacts-form__textarea::placeholder {
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   color: #999;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -882,7 +910,7 @@ img {
   padding: 18px;
   background-color: #d12d35;
   color: #fff;
-  font-family: "Cinzel", serif;
+  font-family: 'Cinzel', serif;
   font-size: 18px;
   text-transform: uppercase;
   font-weight: bold;
@@ -929,7 +957,7 @@ img {
   height: 100%;
   display: block;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   -o-object-position: center center;
-     object-position: center center;
-}/*# sourceMappingURL=main.css.map */
+  object-position: center center;
+} /*# sourceMappingURL=main.css.map */
